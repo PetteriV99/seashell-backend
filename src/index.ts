@@ -1,14 +1,11 @@
 import express from 'express';
+import 'dotenv/config';
+import logger from './utils/logger';
+
 const app = express();
 app.use(express.json());
 
-const PORT = 3000;
-
-app.get('/ping', (_req, res) => {
-  console.log('someone pinged here');
-  res.send('pong');
-});
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.listen(process.env.PORT, () => {
+  console.log(`Server running on port ${process.env.PORT}`);
+})
+.on('error', (error) => logger.error(error));
